@@ -1,8 +1,8 @@
 package main
 
 import (
-	"../../inigo"
 	"fmt"
+	"github.com/kucuny/inigo"
 )
 
 func main() {
