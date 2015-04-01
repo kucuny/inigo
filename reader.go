@@ -2,6 +2,7 @@ package inigo
 
 import (
 	"errors"
+	"fmt"
 )
 
 // Get config file name
@@ -11,12 +12,28 @@ func (config *Config) GetConfigFilename() string {
 
 // Get all config sections
 func (config *Config) GetAllSections() []string {
-	return nil
+	var res []string
+
+	for key, _ := range config.config {
+		res = append(res, key)
+	}
+
+	return res
 }
 
 // Get all keys
 func (config *Config) GetAllKeys() map[string][]string {
-	return nil
+	var res map[string][]string = make(map[string][]string)
+
+	for section, data := range config.config {
+		for key, _ := range data.data {
+			res[section] = append(res[section], key)
+		}
+	}
+
+	fmt.Println(res)
+
+	return res
 }
 
 // Get value
