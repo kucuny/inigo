@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"os"
 	"regexp"
+	"strings"
 )
 
 const (
@@ -61,15 +62,15 @@ func getSection(source string) (section, inheritSection string) {
 	sectionReg, _ := regexp.Compile(REGEX_SECTION)
 
 	if ok := sectionReg.MatchString(source); ok {
-		section = sectionReg.FindStringSubmatch(source)[1]
+		section = strings.TrimSpace(sectionReg.FindStringSubmatch(source)[1])
 
 		inheritSectionReg, _ := regexp.Compile(REGEX_INHERITANCE_SECTION)
 
 		inheritSection = DEFAULT_SECTION
 
 		if ok := inheritSectionReg.MatchString(section); ok {
-			inheritSection = inheritSectionReg.FindStringSubmatch(section)[2]
-			section = inheritSectionReg.FindStringSubmatch(section)[1]
+			inheritSection = strings.TrimSpace(inheritSectionReg.FindStringSubmatch(section)[2])
+			section = strings.TrimSpace(inheritSectionReg.FindStringSubmatch(section)[1])
 		}
 	}
 
@@ -81,8 +82,8 @@ func getKeyValue(source string) (key, value string) {
 	reg, _ := regexp.Compile(REGEX_KEY_VALUE)
 
 	if ok := reg.MatchString(source); ok {
-		key = reg.FindStringSubmatch(source)[1]
-		value = reg.FindStringSubmatch(source)[2]
+		key = strings.TrimSpace(reg.FindStringSubmatch(source)[1])
+		value = strings.TrimSpace(reg.FindStringSubmatch(source)[2])
 	}
 
 	return

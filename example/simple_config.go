@@ -6,14 +6,20 @@ import (
 )
 
 func main() {
-	config, _ := inigo.LoadConfig("simple_config.ini")
-	// fmt.Println(config)
-	// fmt.Println(config.GetValue("production", "host"))
-	// fmt.Println(config.GetValue("staging", "db.account"))
-	// fmt.Println(config.GetValue("staging", "db.kucuny"))
-	// fmt.Println(config.GetValue("staging", "db.kucundfdf"))
-	// fmt.Println(config.GetValue("production", "host"))
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered in f", r)
+		}
+	}()
 
-	// fmt.Println(config.GetAllSections())
+	config, _ := inigo.LoadConfig("simple_config.ini")
+
+	fmt.Println(config.GetValue("production", "host"))
+	fmt.Println(config.GetValue("staging", "db.account"))
+	fmt.Println(config.GetValue("staging", "db.kucuny"))
+	fmt.Println(config.GetValue("staging", "db.kucundfdf"))
+	fmt.Println(config.GetValue("production", "host"))
+
+	fmt.Println(config.GetAllSections())
 	fmt.Println(config.GetAllKeys())
 }

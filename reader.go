@@ -2,7 +2,6 @@ package inigo
 
 import (
 	"errors"
-	"fmt"
 )
 
 // Get config file name
@@ -30,8 +29,6 @@ func (config *Config) GetAllKeys() map[string][]string {
 			res[section] = append(res[section], key)
 		}
 	}
-
-	fmt.Println(res)
 
 	return res
 }
